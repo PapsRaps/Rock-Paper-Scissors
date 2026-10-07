@@ -1,0 +1,20 @@
+body{
+    background-color: black;
+}
+
+.title{
+    color: white;
+    text-align: center;
+}
+
+#choosingField{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.options{
+    width: auto;
+    height: 150px;
+}

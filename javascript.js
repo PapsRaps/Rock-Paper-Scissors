@@ -76,11 +76,6 @@ function playGame(){
     let humanScore = 0;
     let computerScore = 0;
 
-    playRound();
-    playRound();
-    playRound();
-    playRound();
-    playRound();
 
     if (humanScore > computerScore){
         console.log(`Congrats You won! You won ${humanScore} times while I only won ${computerScore} times.`)
@@ -96,3 +91,5 @@ function playGame(){
 
 
 playGame();
+
+
