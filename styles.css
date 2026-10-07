@@ -45,6 +45,7 @@ img.options,
 img.botOptions{
     width: auto;
     height: 80px;
+    margin-bottom: 30px;
 }
 
 #choosingFieldDescription,

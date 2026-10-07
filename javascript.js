@@ -152,17 +152,17 @@ function playGame(){
             switch (humanChoice){
                 case "rock":
                     console.log("Tie! We both chosen Rock.")
-                    checkRounds(roundsPlayed);
+                    checkRounds(roundsPlayed, 0);
                     return;
                 case "paper":
                     humanScore++;
                     console.log("You win! Your Paper beats My Rock.")
-                    checkRounds(roundsPlayed);
+                    checkRounds(roundsPlayed, 1);
                     return;
                 case "scissors":
                     computerScore++;
                     console.log("You lose! My Rock beats Your Scissors.")
-                    checkRounds(roundsPlayed);
+                    checkRounds(roundsPlayed, -1);
                     return;
             }   
         }else if(computerChoice === "paper"){
@@ -170,16 +170,16 @@ function playGame(){
                 case "rock":
                     computerScore++;
                     console.log("You lose! My Paper beats Your Rock.")
-                    checkRounds(roundsPlayed);
+                    checkRounds(roundsPlayed, -1);
                     return;
                 case "paper":
                     console.log("Tie! We both chosen Paper.")
-                    checkRounds(roundsPlayed);
+                    checkRounds(roundsPlayed, 0);
                     return;
                 case "scissors":
                     humanScore++;
                     console.log("You win! Your Scissors beats My Paper.")
-                    checkRounds(roundsPlayed);
+                    checkRounds(roundsPlayed, 1);
                     return;
             }
         }else if(computerChoice === "scissors"){
@@ -187,53 +187,66 @@ function playGame(){
                 case "rock":
                     humanScore++;
                     console.log("You win! Your Rock beats My Scissors.")
-                    checkRounds(roundsPlayed);
+                    checkRounds(roundsPlayed, 1);
                     return;
                 case "paper":
                     computerScore++;
                     console.log("You lose! My Scissors beats Your Paper.")
-                    checkRounds(roundsPlayed);
+                    checkRounds(roundsPlayed, -1);
                     return;
                 case "scissors":
                     computerScore++;
                     console.log("Tie! We both chosen Scissors.")
-                    checkRounds(roundsPlayed);
+                    checkRounds(roundsPlayed, 0);
                     return;
             }
         }
     }
 
-    let checkRounds = function(rounds){
+    let checkRounds = function(rounds, win_tie_loss){
         if (rounds > 5){
-            console.log('TAPOS NA')
             choosingField.replaceChildren();
             choosingFieldDesc.replaceChildren();
             botField.replaceChildren();
             botFieldDesc.replaceChildren();
-            displayResults();
+            displayResults(true);
+        }else{
+            displayResults(false, win_tie_loss);
         }
     }
 
-    let displayResults = function(){
+    let displayResults = function(isFinished, win_tie_loss){
+        resultContainer.replaceChildren();
+
         const resultsDisplay = document.createElement('p')
 
         resultsDisplay.classList.add('resultsDesign')
 
-        if (humanScore > computerScore){
-            resultsDisplay.style.color = 'green'
-            resultsDisplay.textContent = `Congrats You won! You won ${humanScore} times while the Computer only won ${computerScore} times.`
-        }else if (computerScore > humanScore){
-            resultsDisplay.style.color = 'red'
-            resultsDisplay.textContent = `You lose! You only won ${humanScore} times while Computer won ${computerScore} times.`
+        if(isFinished){
+            if (humanScore > computerScore){
+                resultsDisplay.style.color = 'green'
+                resultsDisplay.textContent = `Congrats You won! You won ${humanScore} times while the Computer only won ${computerScore} times.`
+            }else if (computerScore > humanScore){
+                resultsDisplay.style.color = 'red'
+                resultsDisplay.textContent = `You lose! You only won ${humanScore} times while Computer won ${computerScore} times.`
+            }else{
+                resultsDisplay.style.color = 'yellow'
+                resultsDisplay.textContent = `We have a tie! You both won ${humanScore} times.`
+            }
         }else{
-            resultsDisplay.style.color = 'yellow'
-            resultsDisplay.textContent = `We have a tie! You both won ${humanScore} times.`
+            if (win_tie_loss === 1){
+                resultsDisplay.style.color = 'green'
+                resultsDisplay.textContent = 'Win!'
+            }else if (win_tie_loss === -1){
+                resultsDisplay.style.color = 'red'
+                resultsDisplay.textContent = 'Lose!'
+            }else if (win_tie_loss === 0){
+                resultsDisplay.style.color = 'yellow'
+                resultsDisplay.textContent = 'Tie!'
+            }
         }
 
         resultContainer.appendChild(resultsDisplay);
-
-
-        
     }
 }
 
