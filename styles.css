@@ -2,7 +2,8 @@ body{
     background-color: black;
 }
 
-#titleContent{
+#titleContent,
+#resultContainer{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -54,4 +55,9 @@ img.botOptions{
 p{
     color: white;
     font-size: 1.4em;
+}
+
+.resultsDesign{
+    text-align: center;
+    margin: 0 40px 30px 40px;
 }
