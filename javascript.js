@@ -1,77 +1,3 @@
-
-
-
-
-// function playGame(){
-//     let playRound = function() {
-
-//         let humanChoice = getHumanChoice();
-//         let computerChoice = getComputerChoice();
-    
-//         if (computerChoice === "rock"){
-//             switch (humanChoice){
-//                 case "rock":
-//                     console.log("Tie! We both chosen Rock.")
-//                     return;
-//                 case "paper":
-//                     humanScore++;
-//                     console.log("You win! Your Paper beats My Rock.")
-//                     return;
-//                 case "scissors":
-//                     computerScore++;
-//                     console.log("You lose! My Rock beats Your Scissors.")
-//                     return;
-//             }   
-//         }else if(computerChoice === "paper"){
-//             switch (humanChoice){
-//                 case "rock":
-//                     computerScore++;
-//                     console.log("You lose! My Paper beats Your Rock.")
-//                     return;
-//                 case "paper":
-//                     console.log("Tie! We both chosen Paper.")
-//                     return;
-//                 case "scissors":
-//                     humanScore++;
-//                     console.log("You win! Your Scissors beats My Paper.")
-//                     return;
-//             }
-//         }else if(computerChoice === "scissors"){
-//             switch (humanChoice){
-//                 case "rock":
-//                     humanScore++;
-//                     console.log("You win! Your Rock beats My Scissors.")
-//                     return;
-//                 case "paper":
-//                     computerScore++;
-//                     console.log("You lose! My Scissors beats Your Paper.")
-//                     return;
-//                 case "scissors":
-//                     computerScore++;
-//                     console.log("Tie! We both chosen Scissors.")
-//                     return;
-//             }
-//         }
-//     }
-    
-//     let humanScore = 0;
-//     let computerScore = 0;
-
-
-//     if (humanScore > computerScore){
-//         console.log(`Congrats You won! You won ${humanScore} times while I only won ${computerScore} times.`)
-//     }else if (computerScore > humanScore){
-//         console.log(`You lose! You only won ${humanScore} times while I won ${computerScore} times.`)
-//     }else{
-//         console.log(`We have a tie! We both won ${humanScore} times.`)
-//     }
-
-
-
-// }
-
-
-
 const startButton = document.getElementById('startButton');
 const choosingField = document.getElementById('choosingField');
 const botField = document.getElementById('botField');
@@ -81,9 +7,17 @@ const resultContainer = document.getElementById('resultContainer');
 
 
 
-startButton.addEventListener('click', playGame);
+startButton.addEventListener('click', playFirstGame);
+
+function playFirstGame(){
+    startButton.parentElement.removeChild(startButton);
+    playGame();
+}
 
 function playGame(){
+
+    resultContainer.replaceChildren();
+
     const playerFieldDescription = document.createElement('p');
     const botFieldDescription = document.createElement('p');
 
@@ -124,7 +58,7 @@ function playGame(){
 
     botField.appendChild(botChosen);
 
-    startButton.parentElement.removeChild(startButton);
+    
 
 
 
@@ -204,6 +138,7 @@ function playGame(){
     }
 
     let checkRounds = function(rounds, win_tie_loss){
+        console.log(`Your Score ${humanScore}, Computer Score ${computerScore}`)
         if (rounds > 5){
             choosingField.replaceChildren();
             choosingFieldDesc.replaceChildren();
@@ -233,6 +168,17 @@ function playGame(){
                 resultsDisplay.style.color = 'yellow'
                 resultsDisplay.textContent = `We have a tie! You both won ${humanScore} times.`
             }
+
+            resultContainer.appendChild(resultsDisplay);
+
+            const playAgain = document.createElement('button');
+            playAgain.textContent = 'Play Again?';
+            playAgain.id = 'startButton';
+
+            playAgain.addEventListener('click', playGame);
+
+            resultContainer.appendChild(playAgain);
+
         }else{
             if (win_tie_loss === 1){
                 resultsDisplay.style.color = 'green'
@@ -244,9 +190,9 @@ function playGame(){
                 resultsDisplay.style.color = 'yellow'
                 resultsDisplay.textContent = 'Tie!'
             }
-        }
 
-        resultContainer.appendChild(resultsDisplay);
+            resultContainer.appendChild(resultsDisplay);
+        }
     }
 }
 
