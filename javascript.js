@@ -73,6 +73,10 @@
 
 
 const startButton = document.getElementById('startButton');
+const choosingField = document.getElementById('choosingField');
+const botField = document.getElementById('botField');
+const choosingFieldDesc = document.getElementById('choosingFieldDescription');
+const botFieldDesc = document.getElementById('botFieldDescription');
 const resultContainer = document.getElementById('resultContainer');
 
 
@@ -84,11 +88,20 @@ resultDisplay.style.color = 'white';
 startButton.addEventListener('click', playGame);
 
 function playGame(){
-    const choosingField = document.getElementById('choosingField');
+    const playerFieldDescription = document.createElement('p');
+    const botFieldDescription = document.createElement('p');
+
+    playerFieldDescription.textContent = "You Choose:"
+    botFieldDescription.textContent = "Bot Chosen:"
+
+    choosingFieldDesc.appendChild(playerFieldDescription);
+    botFieldDesc.appendChild(botFieldDescription);
+
 
     const rockBTN = document.createElement('img');
     const paperBTN = document.createElement('img');
     const scissorsBTN = document.createElement('img');
+    const botChosen = document.createElement('img');
 
     rockBTN.classList.add('options')
     rockBTN.id = 'rock'
@@ -109,7 +122,15 @@ function playGame(){
     choosingField.appendChild(paperBTN);
     choosingField.appendChild(scissorsBTN);
 
+    botChosen.classList.add('botOptions')
+    botChosen.src = './images/question_mark.jpg'
+    botChosen.alt = 'Picture of a Question Mark'
+
+    botField.appendChild(botChosen);
+
     startButton.parentElement.removeChild(startButton);
+
+
 
 
     const imgOptions = document.getElementsByClassName('options');
@@ -177,16 +198,18 @@ function playGame(){
 
 let getComputerChoice = function() {
     let randomNum = Math.floor(Math.random()*3);
+    const botChosen = document.getElementsByClassName('botOptions')
+    
 
     switch(randomNum){
         case 0:
+            botChosen[0].src = `./images/rock.jpg`
             return "rock";
-            break;
         case 1:
+            botChosen[0].src = `./images/paper.jpg`
             return "paper";
-            break;
         case 2:
+            botChosen[0].src = `./images/scissors.jpg`
             return "scissors";
-            break;
     }
 }

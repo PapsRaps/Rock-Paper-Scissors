@@ -29,14 +29,29 @@ button#startButton{
     border: 1px solid #cbd5e0;
 }
 
-#choosingField{
+#choosingField, #botField{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
 }
 
-img.options{
+#botField{
+    margin-top: 20px;
+}
+
+img.options,
+img.botOptions{
     width: auto;
     height: 80px;
+}
+
+#choosingFieldDescription,
+#botFieldDescription{
+    text-align: center;
+}
+
+p{
+    color: white;
+    font-size: 1.4em;
 }
